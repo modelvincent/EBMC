@@ -26,7 +26,7 @@
 #include "MD_RobotEyes.h"
 #include <PPMReader.h>
 
-#define DEBUG_LEVEL 0      
+#define DEBUG_LEVEL 0     
 
 
 const char* PARAM_FADER1 = "fader1";
@@ -353,7 +353,7 @@ void loop() {
       if(channel <  channelAmount) Serial.print('\t');
     }
     
-    if(value >1000 && value < 2000)
+    if(value >=1000 && value <= 2050)
     {
       if(channel==1)
       {
@@ -387,25 +387,52 @@ void loop() {
 
       if(channel==5)
       {
-        if(previous_channel5 !=
-        if(value > 1800)
+        if(value > 1800) 
         {
-      /   Serial.print("Changement de channel 2 car previous_channel=");
-          Serial.print(previous_Channel1);
-          Serial.print(" et value = ");
-          Serial.println(value);*/
-          
-          OSCpush[0]=1;
-          OSCnewMessage=1;
-          OSCpage=1;
-          previous_Channel5=value;
+          if(OSCpush[0]==0)
+          {          
+            OSCpush[0]=1;
+            OSCnewMessage=1;
+            OSCpage=1;
+          }
         }
         else
         {
-            OSCpush[0]=1;
+          if(OSCpush[0]!=0)
+          {
+            OSCpush[0]=0;
+            OSCnewMessage=1;
+            OSCpage=1;
+          }
+            
         }
       }
-      
+
+      if(channel==6)
+      {
+        if(value > 1800)
+        {
+          if(OSCtoggle[0]==0)
+          {
+            Serial.println("Passage en mode Pro");
+                   
+            OSCtoggle[0]=1;
+            OSCnewMessage=1;
+            OSCpage=1;
+          }
+        }
+        else
+        {
+          if(OSCtoggle[0]!=0)
+          {
+            Serial.println("Passage en mode Easy");
+            OSCtoggle[0]=0;
+            OSCnewMessage=1;
+            OSCpage=1;
+          }
+            
+        }
+      }
     }
   }
 
@@ -566,11 +593,11 @@ void loop() {
     // Normal condition?
   //  Serial.print("angle=");
    // Serial.println(angle_adjusted);
-   if(previous_steering != steering)
+  /* if(previous_steering != steering)
    {
      Serial.print("steering=");
       Serial.println(steering);
-   }
+   }*/
     if ((angle_adjusted < 56) && (angle_adjusted > -56)) {
       Kp = Kp_user;            // Default user control gains
       Kd = Kd_user;
