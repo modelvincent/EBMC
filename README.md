@@ -1,5 +1,6 @@
 # EBMC
- ESP32 Balancing Mobile Cart
+ ESP32 Balancing Mechadroid Circuit
+ 
 
 
 Issu du code ESP32_balancing_robot
