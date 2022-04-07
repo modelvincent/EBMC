@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>Logo.jpg</file>
+        <file alias="carbon_background">carbon_background.jpg</file>
+    </qresource>
+</RCC>

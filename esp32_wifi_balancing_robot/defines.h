@@ -50,7 +50,7 @@
 #define ANGLE_OFFSET 0.0  // Offset angle for balance (to compensate robot own weight distribution)
 
 // Servo definitions
-#define SERVO_AUX_NEUTRO 4444  // Servo neutral position
+#define SERVO_AUX_NEUTRO 4644  // Servo neutral position 4444
 #define SERVO_MIN_PULSEWIDTH SERVO_AUX_NEUTRO - 2700
 #define SERVO_MAX_PULSEWIDTH SERVO_AUX_NEUTRO + 2700
 

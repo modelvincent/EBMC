@@ -73,7 +73,7 @@ MD_RobotEyes::emotion_t previous_emotion=MD_RobotEyes::E_NEUTRAL;
 int sensorPin = 36;    // GPIO36 = ADC0
 int sensorValue=0;
 
-#define R1 47000.0
+#define R1 53500.0
 #define R2 10000.0
 
 float BatteryVoltage=0.0;
@@ -319,12 +319,12 @@ void loop() {
   sensorValue = analogRead(sensorPin);
   BatteryVoltage=CalculADC(sensorValue);
   
-  /*if(DEBUG_LEVEL>0)
+  if(DEBUG_LEVEL>0)
   {
     Serial.print("RetourADC=");
     Serial.println(sensorValue);
-    Serial.println(Retour);
-  }*/
+    Serial.println(BatteryVoltage);
+  }
 
 
   
