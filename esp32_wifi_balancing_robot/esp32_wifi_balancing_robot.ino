@@ -76,7 +76,7 @@ int sensorValue=0;
 #define R1 47000.0
 #define R2 10000.0
 
-
+float BatteryVoltage=0.0;
 
 // Initialize a PPMReader on digital pin 34 with 8 expected channels.
 byte interruptPin = 35;
@@ -279,7 +279,8 @@ void setup() {
       inputValue = "No message sent";
     }
     Serial.println(inputMessage+'='+inputValue);
-    request->send(200, "text/text", "");
+    String Batterie=String(BatteryVoltage, 3);
+    request->send(200, "text/text", Batterie);
   });
 
   server.onNotFound (notFound);    // when a client requests an unknown URI (i.e. something other than "/"), call function "handleNotFound"
@@ -316,7 +317,8 @@ void setup() {
 void loop() {
 
   sensorValue = analogRead(sensorPin);
-  float Retour=CalculADC(sensorValue);
+  BatteryVoltage=CalculADC(sensorValue);
+  
   /*if(DEBUG_LEVEL>0)
   {
     Serial.print("RetourADC=");
